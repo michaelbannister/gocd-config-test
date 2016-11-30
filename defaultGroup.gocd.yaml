@@ -1,0 +1,34 @@
+pipelines:
+  defaultPipeline:
+    group: defaultGroup
+    materials:
+      "https://github.com/michaelbannister/gocd-config-test.git":
+        git: https://github.com/michaelbannister/gocd-config-test.git
+    stages:
+      - defaultStage:
+          jobs:
+            defaultJob:
+              tasks:
+                - exec:
+                    command: /bin/sh
+                    arguments: [ "-c", "echo "$GO_PIPELINE_NAME $GO_PIPELINE_COUNTER" > output.txt" ]
+              artifacts:
+                - build: { source: "output.txt" }
+  dependentPipeline:
+    group: defaultGroup
+    materials:
+      upstream:
+        pipeline: defaultPipeline
+        stage: defaultStage
+    stages:
+      - defaultStage:
+          jobs:
+            defaultJob:
+              tasks:
+                - fetch:
+                    pipeline: defaultPipeline
+                    stage: defaultStage
+                    job: defaultJob
+                    source: output.txt
+                    is_file: yes
+                    destination: inputs
