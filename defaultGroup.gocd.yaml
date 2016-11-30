@@ -12,7 +12,7 @@ pipelines:
               tasks:
                 - exec:
                     command: /bin/sh
-                    arguments: [ "-c", "echo "$GO_PIPELINE_NAME $GO_PIPELINE_COUNTER" > output.txt" ]
+                    arguments: [ "-c", 'echo "$GO_PIPELINE_NAME $GO_PIPELINE_COUNTER" > output.txt' ]
               artifacts:
                 - build: { source: "output.txt" }
   dependentPipeline:
