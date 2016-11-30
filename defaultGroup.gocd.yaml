@@ -2,7 +2,7 @@ pipelines:
   defaultPipeline:
     group: defaultGroup
     materials:
-      "https://github.com/michaelbannister/gocd-config-test.git":
+      gocd-config-test:
         git: https://github.com/michaelbannister/gocd-config-test.git
     stages:
       - defaultStage:
