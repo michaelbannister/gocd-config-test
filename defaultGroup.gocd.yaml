@@ -6,6 +6,7 @@ pipelines:
         git: https://github.com/michaelbannister/gocd-config-test.git
     stages:
       - defaultStage:
+          clean_workspace: true
           jobs:
             defaultJob:
               tasks:
