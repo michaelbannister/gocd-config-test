@@ -6,7 +6,6 @@ pipelines:
         git: https://github.com/michaelbannister/gocd-config-test.git
     stages:
       - defaultStage:
-          clean_workspace: true
           jobs:
             defaultJob:
               tasks:
@@ -14,7 +13,7 @@ pipelines:
                     command: /bin/sh
                     arguments: [ "-c", "echo "$GO_PIPELINE_NAME $GO_PIPELINE_COUNTER" > output.txt" ]
               artifacts:
-                - build: { source: "output.txt" }
+                - build: { source: "output.txt", destination: "all" }
   dependentPipeline:
     group: defaultGroup
     materials:
@@ -30,6 +29,6 @@ pipelines:
                     pipeline: defaultPipeline
                     stage: defaultStage
                     job: defaultJob
-                    source: output.txt
+                    source: all/output.txt
                     is_file: yes
                     destination: inputs
