@@ -19,7 +19,7 @@ pipelines:
     group: group-a
     materials:
       upstream:
-        pipeline: defaultPipeline
+        pipeline: pipeline-a1
         stage: defaultStage
     stages:
       - defaultStage:
