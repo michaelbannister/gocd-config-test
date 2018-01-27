@@ -33,7 +33,31 @@ pipelines:
                     source: output.txt
                     is_file: yes
                     destination: inputs
+  pipeline-A20:
+    group: group-a
+    materials:
+      gocd-config-test:
+        git: https://github.com/michaelbannister/gocd-config-test.git
+    stages:
+      - defaultStage:
+          approval:
+            type: manual
+          tasks:
+            - exec:
+                command: whoami
   pipeline-a3:
+    group: group-a
+    materials:
+      gocd-config-test:
+        git: https://github.com/michaelbannister/gocd-config-test.git
+    stages:
+      - defaultStage:
+          approval:
+            type: manual
+          tasks:
+            - exec:
+                command: whoami
+  pipeline-a0:
     group: group-a
     materials:
       gocd-config-test:
