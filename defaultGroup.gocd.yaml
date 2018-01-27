@@ -1,6 +1,6 @@
 pipelines:
-  defaultPipeline:
-    group: defaultGroup
+  pipeline-a1:
+    group: group-a
     materials:
       gocd-config-test:
         git: https://github.com/michaelbannister/gocd-config-test.git
@@ -15,8 +15,8 @@ pipelines:
                     arguments: [ "-c", 'echo "$GO_PIPELINE_NAME $GO_PIPELINE_COUNTER" > output.txt' ]
               artifacts:
                 - build: { source: "output.txt" }
-  dependentPipeline:
-    group: defaultGroup
+  pipeline-a2:
+    group: group-a
     materials:
       upstream:
         pipeline: defaultPipeline
@@ -27,9 +27,57 @@ pipelines:
             defaultJob:
               tasks:
                 - fetch:
-                    pipeline: defaultPipeline
+                    pipeline: pipeline-a1
                     stage: defaultStage
                     job: defaultJob
                     source: output.txt
                     is_file: yes
                     destination: inputs
+  pipeline-a3:
+    group: group-a
+    materials:
+      gocd-config-test:
+        git: https://github.com/michaelbannister/gocd-config-test.git
+    stages:
+      - defaultStage:
+          approval:
+            type: manual
+          tasks:
+            - exec:
+                command: whoami
+  pipeline-b1:
+    group: group-b
+    materials:
+      gocd-config-test:
+        git: https://github.com/michaelbannister/gocd-config-test.git
+    stages:
+      - defaultStage:
+          approval:
+            type: manual
+          tasks:
+            - exec:
+                command: whoami
+  pipeline-b2:
+    group: group-b
+    materials:
+      gocd-config-test:
+        git: https://github.com/michaelbannister/gocd-config-test.git
+    stages:
+      - defaultStage:
+          approval:
+            type: manual
+          tasks:
+            - exec:
+                command: whoami
+  pipeline-b3:
+    group: group-b
+    materials:
+      gocd-config-test:
+        git: https://github.com/michaelbannister/gocd-config-test.git
+    stages:
+      - defaultStage:
+          approval:
+            type: manual
+          tasks:
+            - exec:
+                command: whoami
